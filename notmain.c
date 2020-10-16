@@ -39,7 +39,7 @@ int notmain(void) {
 
     // Set the GPIO to operate in output mode
     // Use the GPIOA_MODER register to do that.
-    rval = GET32(0x40020000) | 0x00004000;
+    rval = GET32(0x40020000) | 0x00104000;
     PUT32(0x40020000, rval);
 
     while (1) {
@@ -48,7 +48,7 @@ int notmain(void) {
         // to do that and do a bitwise AND operation over the current value.
         // Use the GPIOA_ODR register to lower the bit corresponding to pin PA7
 
-         rval = GET32(0x40020014) & 0xFFFFFF7F;
+         rval = GET32(0x40020014) & 0xFFFFFB7F;
          PUT32(0x40020014, rval);
 
         DELAY(delay_small);
@@ -57,20 +57,20 @@ int notmain(void) {
         // HIGH. So we use bit masking to do that and do an OR operation over 
         // the current value.
         // Use the GPIOA_ODR register to up the bit corresponding to pin PA7
-        rval = GET32(0x40020014) | 0x00000080;
+        rval = GET32(0x40020014) | 0x00000480;
         PUT32(0x40020014, rval);
 
         DELAY(delay_small);
  
  
         // Turn ON the LED again
-         rval = GET32(0x40020014) & 0xFFFFFF7F;
+         rval = GET32(0x40020014) & 0xFFFFFB7F;
          PUT32(0x40020014, rval);
 
         DELAY(delay_small);
  
         //Turn OFF the LED again
-        rval = GET32(0x40020014) | 0x00000080;
+        rval = GET32(0x40020014) | 0x00000480;
         PUT32(0x40020014, rval);
 
         DELAY(delay_big);
